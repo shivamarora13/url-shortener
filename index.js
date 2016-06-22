@@ -26,10 +26,17 @@ mongo.connect(url,function(err,db){
     if(!validUrl.isUri(url)){
       response.json({Error : "URL Invalid"});
     }else{
-      sequence++;
-      Urls.insertOne({"original_url":req_url, "short_url":original_url+sequence});
-      response.json({"original_url":req_url, "short_url":original_url+sequence});
-      response.end();
+      if(Urls.findOne({"original_url":req_url})){
+        Urls.find({"original_url":req_url}).limit(1).toArray(function(err,doc){
+          delete doc[0]['_id'];
+          response.send(doc);
+        });
+      }else{
+        sequence++;
+        Urls.insertOne({"original_url":req_url, "short_url":original_url+sequence});
+        response.json({"original_url":req_url, "short_url":original_url+sequence});
+        response.end();
+      }
     }
 });
 
