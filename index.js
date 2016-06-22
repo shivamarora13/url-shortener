@@ -3,7 +3,6 @@ var mongo = require('mongodb').MongoClient;
 var app = express();
 var url = 'mongodb://user:password@ds021761.mlab.com:21761/shorturl';
 var validUrl = require('valid-url');
-var sequence = 0;
 var original_url = 'https://cryptic-reef-58313.herokuapp.com/';
 app.set('port', (process.env.PORT || 5000));
 
@@ -22,21 +21,15 @@ mongo.connect(url,function(err,db){
   });
 
   app.get('/new/*',function(request,response){
+    var sequence = 0;
     var req_url = request.path.replace('/new/','');
     if(!validUrl.isUri(url)){
       response.json({Error : "URL Invalid"});
     }else{
-      if(Urls.findOne({"original_url":req_url})){
-        Urls.find({"original_url":req_url}).limit(1).toArray(function(err,doc){
-          delete doc[0]['_id'];
-          response.send(doc);
-        });
-      }else{
-        sequence++;
+        var sequence = Math.floor((Math.random()*1000)+1);
         Urls.insertOne({"original_url":req_url, "short_url":original_url+sequence});
         response.json({"original_url":req_url, "short_url":original_url+sequence});
         response.end();
-      }
     }
 });
 
