@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>FreeCodeCamp -  URL Shortener MicroService</title>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet" type="text/css">
+  </head>
+
+  <body>
+    <div class="container">
+      <div class="page-header">
+        <h1>API Basejump: <small>URL Shortener Microservice</small></h1>
+      </div>
+
+      <blockquote>
+        <p>This is a url shortening microservice. The purpose of this
+        microservice is to be able to parse a url in the format of
+        `http://www.google.com` or `https://www.google.com` to the `/new`
+        endpiont, assign that url to an internal number, and redirect the user
+        to that url when they visit
+        `https://cryptic-reef-58313.herokuapp.com/int`.</p>
+      </blockquote>
+
+      <h2>Example Creation Usage</h2>
+      <code>https://cryptic-reef-58313.herokuapp.com/new/http://www.google.com</code>
+      <br />
+      <h2>Example Creation Output</h2>
+      <code>{"original_url": "http://www.google.com","short_url": "https://cryptic-reef-58313.herokuapp.com/1"}</code>
+      <br />
+      <h2>Example Usage</h2>
+      `https://cryptic-reef-58313.herokuapp.com/1` will <strong>redirect
+        to</strong> `www.google.com`.
+    </div>
+  </body>
+</html>
